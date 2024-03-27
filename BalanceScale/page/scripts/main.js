@@ -15,14 +15,14 @@ var box_left_weld_joint = new Array();
 var box_right = new Array();
 var box_right_weld_joint = new Array();
 var lever_x = 390;
-var lever_y = 340;
+var lever_y = 0;
 var fulcrum_x_holder = 390;
 var fulcrum_y = lever_y;
 var box_left_x = 110;
-var box_left_y = 262;
+var box_left_y = 100;
 var box_right_x = 670;
 var box_right_y = box_left_y;
-var box_dimension = 140;
+var box_dimension = 400;
 var physics_counter = 0;
 var box_left_weight_holder = 1;
 var box_right_weight_holder = 1;
@@ -31,9 +31,9 @@ var box_left_tiles = new Array();
 var box_right_tiles = new Array();
 var menu = new Array();
 var menu_total = 10;
-var menu_start_x = 40;
+var menu_start_x = -275;
 var menu_start_y = 570;
-var menu_width = 78;
+var menu_width = 150;
 var strip = new Array();
 var strip_counter = 0;
 var strip_scale = 1;
@@ -63,7 +63,6 @@ var sound_placement;
 function init() {
   canvasInUse = true;
   document.getElementById("game_container").style.display = "inline";
-  document.getElementById("loading_div").style.display = "none";
   setInteractiveParameters();
   set_data();
   sound_initial = new Howl({
@@ -90,21 +89,21 @@ function init() {
   button_random = new MovieClip(
     document.getElementById("button_random").cloneNode(true)
   );
-  button_random.x = 610;
+  button_random.x = 60;
   button_random.y = 700;
   button_random.transform();
   stage.appendChild(button_random.instance);
   button_center = new MovieClip(
     document.getElementById("button_center").cloneNode(true)
   );
-  button_center.x = 70;
+  button_center.x = 400;
   button_center.y = 700;
   button_center.transform();
   stage.appendChild(button_center.instance);
   button_clear = new MovieClip(
     document.getElementById("button_clear").cloneNode(true)
   );
-  button_clear.x = 725;
+  button_clear.x = 740;
   button_clear.y = 700;
   button_clear.transform();
   stage.appendChild(button_clear.instance);
@@ -113,8 +112,8 @@ function init() {
   );
   button_fulcrum.y = 420;
   button_fulcrum.dragRestricted = true;
-  button_fulcrum.dragMinimumX = 180;
-  button_fulcrum.dragMaximumX = 600;
+  button_fulcrum.dragMinimumX = 390;
+  button_fulcrum.dragMaximumX = 390;
   button_fulcrum.dragMinimumY = button_fulcrum.y;
   button_fulcrum.dragMaximumY = button_fulcrum.y;
   button_fulcrum.dragMoveHandler = function () {};
@@ -154,7 +153,7 @@ function menu_item(id) {
   menu[id].area = menu[id].instance.querySelector(".area");
   menu[id].area.setAttribute("fill", color_data[id]);
   menu[id].text = menu[id].instance.querySelector(".number");
-  menu[id].text.textContent = id;
+  menu[id].text.textContent = (id);
   menu[id].instance.setAttribute("data-id", id);
   stage.appendChild(menu[id].instance);
 }
@@ -540,8 +539,8 @@ function random_handler(event) {
   event.preventDefault();
   if (event.isPrimary) {
     clear_activity();
-    var left_total = generateRandom(1, 3);
-    var right_total = generateRandom(1, 3);
+    var left_total = generateRandom(1, 1);
+    var right_total = generateRandom(1, 1);
     var holder;
     var type;
     holder = new Array();
@@ -684,16 +683,24 @@ function menu_handler(event) {
   }
 }
 function set_data() {
-  color_data[1] = "#FFFFFF";
-  color_data[2] = "#2eb046";
-  color_data[3] = "#00AEEF";
-  color_data[4] = "#fd72af";
-  color_data[5] = "#feeb3a";
-  color_data[6] = "#fca445";
-  color_data[7] = "#7393fb";
-  color_data[8] = "#ff634e";
-  color_data[9] = "#cb5bf2";
-  color_data[10] = "#758abe";
+  color_data[1] = "#e2ca3f";
+  color_data[2] = "#e2ca3f";
+  color_data[3] = "#e2ca3f";
+  color_data[4] = "#e2ca3f";
+  color_data[5] = "#e2ca3f";
+  color_data[6] = "#e2ca3f";
+  color_data[7] = "#e2ca3f";
+  color_data[8] = "#e2ca3f";
+  color_data[9] = "#e2ca3f";
+  color_data[10] = "#e2ca3f";
+  color_data[11] = "#e2ca3f";
+  color_data[12] = "#e2ca3f";
+  color_data[13] = "#e2ca3f";
+  color_data[14] = "#e2ca3f";
+  color_data[15] = "#e2ca3f";
+  color_data[16] = "#e2ca3f";
+  color_data[17] = "#e2ca3f";
+  color_data[18] = "#e2ca3f";
   b2Vec2 = Box2D.Common.Math.b2Vec2;
   b2AABB = Box2D.Collision.b2AABB;
   b2BodyDef = Box2D.Dynamics.b2BodyDef;
