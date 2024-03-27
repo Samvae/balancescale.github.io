@@ -1,89 +1,218 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
-  <title>Balance Scale</title>
-  <script type="text/javascript" src="interactive.js?ver=6.4.3" id="toytheater-svg-interactive-js"></script>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      background-color: #FFFFFF;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    #wrapper {
-      max-width: 100%;
-      width: 100%;
-      padding: 0px;
-      box-sizing: border-box;
-    }
-  </style>
-</head>
-<body>
-  <div id="wrapper">
-    <main>
-      <div id="game_container">
-        <div id="game">
-          <script>
-            var page = "scale";
-          </script>
-          <canvas touch-action="none" pointer-events="none" id="canvasStage" width="1250" height="0"></canvas>
-          <svg touch-action="none" id="stage" viewBox="-350 -225 1500 1000" preserveAspectRatio="xMinYMin" style="background-color: #FFFFFF;">
-            <defs>
-              <symbol id="button" overflow="visible">
-                <rect x="-60" y="-40" rx="20" ry="20" width="120" height="80" fill="#ffffff" stroke="#000000" stroke-width="2" />
-              </symbol>
-            </defs>
-            <g id="svgStage" display="none" pointer-events="none">
-              <rect id="area" width="780" height="750" fill="#ffffff" fill-opacity="0" stroke="#000000" stroke-opacity="0" stroke-width="0" pointer-events="none" />
-            </g>
-            <g id="button_clear" display="none" cursor="pointer" pointer-events="all">
-              <use xlink:href="#button" />
-              <text y="10" text-anchor="middle" class="button">Clear</text>
-            </g>
-            <g id="button_center" display="none" cursor="pointer" pointer-events="all">
-              <!-- <rect x="-60" y="-40" rx="20" ry="20" width="120" height="80" fill="#ffffff" stroke="#000000" stroke-width="2" />
+  <head>
+    <title>Balance Scale</title>
+    <script
+      type="text/javascript"
+      src="interactive.js"
+      id="toytheater-svg-interactive-js"
+    ></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #wrapper {
+        max-width: 100%;
+        width: 100%;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <main>
+        <div id="game_container">
+          <div id="game">
+            <script>
+              var page = "scale";
+            </script>
+            <canvas
+              touch-action="none"
+              pointer-events="none"
+              id="canvasStage"
+              width="1250"
+              height="0"
+            ></canvas>
+            <svg
+              touch-action="none"
+              id="stage"
+              viewBox="-350 -225 1500 1000"
+              preserveAspectRatio="xMinYMin"
+              style="background-color: #ffffff"
+            >
+              <defs>
+                <symbol id="button" overflow="visible">
+                  <rect
+                    x="-60"
+                    y="-40"
+                    rx="20"
+                    ry="20"
+                    width="120"
+                    height="80"
+                    fill="#ffffff"
+                    stroke="#000000"
+                    stroke-width="2"
+                  />
+                </symbol>
+              </defs>
+              <g id="svgStage" display="none" pointer-events="none">
+                <rect
+                  id="area"
+                  width="780"
+                  height="750"
+                  fill="#ffffff"
+                  fill-opacity="0"
+                  stroke="#000000"
+                  stroke-opacity="0"
+                  stroke-width="0"
+                  pointer-events="none"
+                />
+              </g>
+              <g
+                id="button_clear"
+                display="none"
+                cursor="pointer"
+                pointer-events="all"
+              >
+                <use xlink:href="#button" />
+                <text y="10" text-anchor="middle" class="button">Clear</text>
+              </g>
+              <g
+                id="button_center"
+                display="none"
+                cursor="pointer"
+                pointer-events="all"
+              >
+                <!-- <rect x="-60" y="-40" rx="20" ry="20" width="120" height="80" fill="#ffffff" stroke="#000000" stroke-width="2" />
               <text y="10" text-anchor="middle" class="button">Center</text> -->
-            </g>
-            <g id="button_random" display="none" cursor="pointer" pointer-events="all">
-              <rect x="-60" y="-40" rx="20" ry="20" width="120" height="80" fill="#ffffff" stroke="#000000" stroke-width="2" />
-              <text y="10" text-anchor="middle" class="button">Random</text>
-            </g>
-            <g id="button_fulcrum" display="none" cursor="pointer" pointer-events="all">
-              <rect x="0" y="-420" width="20" height="390" fill="#e2ca3f" stroke="#e2ca3f" stroke-width="3" />
-            </g>
-            <g id="box" display="none" pointer-events="none">
-              <rect class="area" fill="#e2ca3f" stroke="#e9d66b" fill-opacity="1" stroke-opacity="1" stroke-width="3" />
-            </g>
-            <g id="box_weight" display="none" pointer-events="none"></g>
-            <g id="border" display="none" pointer-events="none">
-              <rect class="area" fill="#000000" fill-opacity="1" stroke-opacity="0" stroke-width="0" />
-            </g>
-            <circle cx="400" cy="-10" r="15" fill="#e2ca3f" stroke="#e2ca3f" stroke-width="1" />
-            <g id="circle_src" display="none" pointer-events="none">
-              <circle class="area" fill="#FFFFFF" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="3" cx="0" cy="0" r="10" />
-            </g>
-            <path d="M 5 100 A 50 50 1 0 1 150 100 Z" fill="#e2ca3f" stroke="#e9d66b" stroke-width="1" transform="translate(323,300)"/>
-            <g id="strip" display="none" cursor="pointer" pointer-events="all">
-              <rect class="area" x="-35" y="-35" rx="1" ry="1" width="70" height="70" fill="#ffffff" fill-opacity="1" stroke="#000000" stroke-opacity="1" stroke-width="1" />
-              <text x="0" y="17" text-anchor="middle" class="number">1</text>
-            </g>
-            <g id="hit_effect" display="none" pointer-events="none">
-              <g id="frame1" display="none"></g>
-              <g id="frame6" display="none"></g>
-            </g>
-          </svg>
-          <script src="howler4.js"></script>
-          <script src="Box2dWeb-2.1.a.3.min.js"></script>
-          <script src="main.js"></script>
-          <link rel="stylesheet" type="text/css" href="page1.css" />
-          <script>
-            window.addEventListener("load", init, false);
-          </script>
+              </g>
+              <g
+                id="button_random"
+                display="none"
+                cursor="pointer"
+                pointer-events="all"
+              >
+                <rect
+                  x="-60"
+                  y="-40"
+                  rx="20"
+                  ry="20"
+                  width="120"
+                  height="80"
+                  fill="#ffffff"
+                  stroke="#000000"
+                  stroke-width="2"
+                />
+                <text y="10" text-anchor="middle" class="button">Random</text>
+              </g>
+              <g
+                id="button_fulcrum"
+                display="none"
+                cursor="pointer"
+                pointer-events="all"
+              >
+                <rect
+                  x="0"
+                  y="-420"
+                  width="20"
+                  height="390"
+                  fill="#e2ca3f"
+                  stroke="#e2ca3f"
+                  stroke-width="3"
+                />
+              </g>
+              <g id="box" display="none" pointer-events="none">
+                <rect
+                  class="area"
+                  fill="#e2ca3f"
+                  stroke="#e9d66b"
+                  fill-opacity="1"
+                  stroke-opacity="1"
+                  stroke-width="3"
+                />
+              </g>
+              <g id="box_weight" display="none" pointer-events="none"></g>
+              <g id="border" display="none" pointer-events="none">
+                <rect
+                  class="area"
+                  fill="#000000"
+                  fill-opacity="1"
+                  stroke-opacity="0"
+                  stroke-width="0"
+                />
+              </g>
+              <circle
+                cx="400"
+                cy="-10"
+                r="15"
+                fill="#e2ca3f"
+                stroke="#e2ca3f"
+                stroke-width="1"
+              />
+              <g id="circle_src" display="none" pointer-events="none">
+                <circle
+                  class="area"
+                  fill="#FFFFFF"
+                  fill-opacity="1"
+                  stroke="#000000"
+                  stroke-opacity="1"
+                  stroke-width="3"
+                  cx="0"
+                  cy="0"
+                  r="10"
+                />
+              </g>
+              <path
+                d="M 5 100 A 50 50 1 0 1 150 100 Z"
+                fill="#e2ca3f"
+                stroke="#e9d66b"
+                stroke-width="1"
+                transform="translate(323,300)"
+              />
+              <g
+                id="strip"
+                display="none"
+                cursor="pointer"
+                pointer-events="all"
+              >
+                <rect
+                  class="area"
+                  x="-35"
+                  y="-35"
+                  rx="1"
+                  ry="1"
+                  width="70"
+                  height="70"
+                  fill="#ffffff"
+                  fill-opacity="1"
+                  stroke="#000000"
+                  stroke-opacity="1"
+                  stroke-width="1"
+                />
+                <text x="0" y="17" text-anchor="middle" class="number">1</text>
+              </g>
+              <g id="hit_effect" display="none" pointer-events="none">
+                <g id="frame1" display="none"></g>
+                <g id="frame6" display="none"></g>
+              </g>
+            </svg>
+            <script src="howler4.js"></script>
+            <script src="Box2dWeb-2.1.a.3.min.js"></script>
+            <script src="main.js"></script>
+            <link rel="stylesheet" type="text/css" href="page1.css" />
+            <script>
+              window.addEventListener("load", init, false);
+            </script>
+          </div>
         </div>
-      </div>
-    </main>
-  </div>
-</body>
+      </main>
+    </div>
+  </body>
 </html>
