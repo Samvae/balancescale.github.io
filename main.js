@@ -30,10 +30,10 @@ var weight_divisor = 50;
 var box_left_tiles = new Array();
 var box_right_tiles = new Array();
 var menu = new Array();
-var menu_total = 10;
-var menu_start_x = -275;
+var menu_total = 7;
+var menu_start_x = -225;
 var menu_start_y = 570;
-var menu_width = 150;
+var menu_width = 200;
 var strip = new Array();
 var strip_counter = 0;
 var strip_scale = 1;
@@ -60,6 +60,17 @@ var inital_sound = false;
 var sound_initial;
 var sound_trash;
 var sound_placement;
+var exerciseList = [
+  "Weights",
+  "Dancing",
+  "Walking",
+  "Calisthenics",
+  "Yard Work",
+  "Golfing",
+  "Jump Rope"
+  // Add more words as needed
+];
+
 function init() {
   canvasInUse = true;
   document.getElementById("game_container").style.display = "inline";
@@ -153,7 +164,11 @@ function menu_item(id) {
   menu[id].area = menu[id].instance.querySelector(".area");
   menu[id].area.setAttribute("fill", color_data[id]);
   menu[id].text = menu[id].instance.querySelector(".number");
-  menu[id].text.textContent = (id);
+  menu[id].text.textContent = exerciseList[id - 1];
+  menu[id].text.style.fontSize = "19px"; 
+  // menu[id].text.style.textAnchor = "middle"; // Center the text
+  // menu[id].text.setAttribute("text-anchor", "middle"); // Center the text
+
   menu[id].instance.setAttribute("data-id", id);
   stage.appendChild(menu[id].instance);
 }
@@ -177,7 +192,9 @@ function strip_item(type, x, y) {
   strip[strip_counter].area.setAttribute("fill", color_data[type]);
   strip[strip_counter].text =
     strip[strip_counter].instance.querySelector(".number");
-  strip[strip_counter].text.textContent = type;
+  strip[strip_counter].text.textContent = exerciseList[type-1];
+  strip[strip_counter].text.style.fontSize = "21px";
+  // strip[strip_counter].text.style.textAnchor = "middle";
   strip[strip_counter].instance.setAttribute("data-id", strip_counter);
   strip[strip_counter].dragFront = true;
   strip[strip_counter].tweenComplete = function () {};
@@ -545,7 +562,7 @@ function random_handler(event) {
     var type;
     holder = new Array();
     for (var i = 1; i <= left_total; i++) {
-      type = generateRandom(1, 10);
+      type = generateRandom(1, 7);
       holder[i] = strip_item(type, 0, 0);
       holder[i].y = (i - 1) * strip_dimension * -1;
       box_left_weight_holder += Number(type);
@@ -556,7 +573,7 @@ function random_handler(event) {
     }
     holder = new Array();
     for (var i = 1; i <= right_total; i++) {
-      type = generateRandom(1, 10);
+      type = generateRandom(1, 7);
       holder[i] = strip_item(type, 0, 0);
       holder[i].y = (i - 1) * strip_dimension * -1;
       box_right_weight_holder += Number(type);
